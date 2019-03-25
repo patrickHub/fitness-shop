@@ -43,6 +43,7 @@ public class ProductDao {
 			ResultSet set = statement.executeQuery();
 			while(set.next()) {
 				Product product = new Product();
+				product.setId(set.getInt("productID"));
 				product.setName(set.getString("ProductName"));
 				product.setPrice(set.getFloat("productPrice"));
 				product.setDescription(set.getString("productDescription"));

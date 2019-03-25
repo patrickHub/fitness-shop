@@ -8,7 +8,13 @@
 	<meta charset="UTF-8">
 	<title>Fitness Shop</title>
 	<link type="text/css"  rel="stylesheet" href="css/bootstrap.min.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">¨
+	<script type="text/javascript">
+		function getProductById(){
+			 document.getElementById('productForm').submit(); 
+		}
+		
+	</script>
 </head>
 
 </head>
@@ -55,8 +61,12 @@
 					      <div class="card-body">
 					        <img class="img-fluid" alt="<%=item.getName()%>" src="image/<%=item.getImgPath()%>" style="max-width:308px; max-height:308px;">
 					       
-					        <button type="button" class="btn btn-lg btn-block btn-outline-danger mt-5">More options</button>
+					        <a href="javascript:getProductById();" class="btn btn-lg btn-block btn-outline-danger mt-5">More options</a>
 					      </div>
+					      
+					      <form action="product" id="productForm" method="get">
+					      	<input type="hidden" name="id" id="test" value="<%=item.getId()%>"/>
+					      </form>
 					    </div>
 			 <%
 				
