@@ -44,7 +44,7 @@ public class ProductDao {
 			while(set.next()) {
 				Product product = new Product();
 				product.setId(set.getInt("productID"));
-				product.setName(set.getString("ProductName"));
+				product.setName(set.getString("productName"));
 				product.setPrice(set.getFloat("productPrice"));
 				product.setDescription(set.getString("productDescription"));
 				product.setImgPath(set.getString("productImgPath"));
@@ -87,7 +87,8 @@ public class ProductDao {
 			ResultSet set = statement.executeQuery();
 			while(set.next()) {
 				product = new Product();
-				product.setName(set.getString("ProductName"));
+				product.setId(set.getInt("productID"));
+				product.setName(set.getString("productName"));
 				product.setPrice(set.getFloat("productPrice"));
 				product.setDescription(set.getString("productDescription"));
 				product.setImgPath(set.getString("productImgPath"));

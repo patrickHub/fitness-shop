@@ -7,6 +7,12 @@
 	<meta charset="ISO-8859-1">
 	<title>Fitness Shop</title>
 	<link type="text/css"  rel="stylesheet" href="css/bootstrap.min.css">
+	<script type="text/javascript">
+		function addToCart(){
+			 document.getElementById('itemDescriptionForm').submit(); 
+		}
+		
+	</script>
 </head>
 <body>
 	
@@ -30,11 +36,16 @@
 				<div class="col-6">
 					<h2 class="blog-post-title text-uppercase mb-3"><%=product.getName()%></h2>
 					<h3 class="blog-post-title text-danger mb-3">CHF <%=product.getPrice() %></h3>
-					<form>
+					<form id="itemDescriptionForm" action="cart" method="post">
 						<label class="text-uppercase" for="quantity">Quantity</label>
-						<input type="text" class="form-control bg-light" id="quantity" style="max-width:180px;">
+						<input type="text" class="form-control bg-light" id="quantity" name="quantity" style="max-width:180px;">
+						<input type="hidden" name="id"  value="<%=product.getId()%>"/>
+						<input type="hidden" name="name"  value="<%=product.getName()%>"/>
+						<input type="hidden" name="price"  value="<%=product.getPrice()%>"/>
+						<input type="hidden" name="description"  value="<%=product.getDescription()%>"/>
+						<input type="hidden" name="imgPath"  value="<%=product.getImgPath()%>"/>
 					</form>
-					<button type="button" class="btn btn-danger btn-md text-white text-uppercase my-5 p-2">add to cart</button>
+					<a href="javascript:addToCart();" class="btn btn-danger btn-md text-white text-uppercase my-5 p-2">add to cart</a>
 					<p class="lead"><%=product.getDescription() %></p>
 				</div>
 			</div>

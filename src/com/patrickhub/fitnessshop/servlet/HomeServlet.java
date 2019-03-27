@@ -13,7 +13,7 @@ import com.patrickhub.fitnessshop.bean.Product;
 import com.patrickhub.fitnessshop.dao.ProductDao;
 
 /**
- * HttServlet to managing default route to the application
+ * HttpServlet to managing default route to the application
  * @author PatrickHub
  *
  */

@@ -1,19 +1,21 @@
-package com.patrickhub.fitnessshop.bean;
+package com.patrickhub.fitnessshop.bean.dto;
 
-
-/**
- * Product Bean
- * @author PatrickHub
- *
- */
-public class Product {
-		
+public class ItemCart {
+	
 	private int id;
 	private String name;
 	private float price;
 	private String description;
 	private String imgPath;
+	private int quantity;
 	
+	@Override
+	public boolean equals(Object obj) {
+		if(this == obj) return true;
+		if(((ItemCart)obj).getId()  == this.id) return true;
+		return false;
+		
+	}
 	
 	public int getId() {
 		return id;
@@ -45,17 +47,21 @@ public class Product {
 	public void setImgPath(String imgPath) {
 		this.imgPath = imgPath;
 	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", description=" + description
-				+ ", imgPath=" + imgPath + "]";
+		return "ItemCart [id=" + id + ", name=" + name + ", price=" + price + ", description=" + description
+				+ ", imgPath=" + imgPath + ", quantity=" + quantity + "]";
 	}
 	
 	
 	
 	
 	
-	
-	
-
 }

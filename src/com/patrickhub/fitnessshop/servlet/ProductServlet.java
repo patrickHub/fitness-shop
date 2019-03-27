@@ -26,6 +26,7 @@ public class ProductServlet extends HttpServlet {
 		
 		// get product id from request
 		String id = req.getParameter("id");
+		System.out.println("Id to fetch: " + id);
 		
 		
 		// get connection to database
@@ -34,6 +35,7 @@ public class ProductServlet extends HttpServlet {
 		// get the "id" product
 		ProductDao productDao = new ProductDao();
 		Product product = productDao.findById(connection, Integer.parseInt(id));
+		System.out.println("Return Product: " + product);
 		
 		// pass the control to product.jsp
 		req.setAttribute("product", product);

@@ -19,17 +19,16 @@ public class URLFilter implements Filter{
 		
 		// pre-possessing 
 		HttpServletRequest req = (HttpServletRequest)request;
-		//System.out.println("URL : "  + req.getRequestURI());
+		
 		// verify that the given id parameter exists and is an number
 		if(req.getRequestURI().startsWith("/fitness-shop/product")) {
-			//System.out.println("URL : "  + req.getRequestURI());
+			
 			// check if the id parameter exist
 			if(req.getParameterMap().containsKey("id")) {
 				String id = req.getParameter("id");
 				try {
 					// check weither the given id parameter can be convert to int
 					int tmp = Integer.parseInt(id);
-					System.out.println("URL : "  + req.getRequestURI());
 				}catch(NumberFormatException  e) {
 					
 					// id parameter is not an number then send the notFound page to user
