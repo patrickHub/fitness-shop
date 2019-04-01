@@ -17,21 +17,23 @@
 $(document).ready(function(){
 
 	$('.quantityUp').on('click',function(){
-    	currentQuantityInput = $(this).prev();
+    	currentQuantityInput = $(this).prev().prev();
     	currentQuantityInput.val(parseInt(currentQuantityInput.val())+1);
+    	document.getElementById('form'+this.id).submit()
     });
     $('.quantityDown').on('click',function(){
     	currentQuantityInput = $(this).next();
     	currentQuantityInput.val(parseInt(currentQuantityInput.val())-1);
+    	document.getElementById('form'+this.id).submit()
     });
 
-    
-//     $('.minus').click(function(){
-//     	  quantityField = $(this).next();
-//     	  if (quantityField.val() != 0) {
-//     	     quantityField.val(parseInt(quantityField.val(), 10) - 1));
-//     	  }
-//     	});
+	$('#checkoutOut').click(function(){
+    	$('#shoppingCart form').each(function () {
+    	    this.submit();
+     	});
+    		
+
+    });
 
 });
 </script>
@@ -44,7 +46,7 @@ $(document).ready(function(){
 			<h2 class="text-center text-danger text-uppercase my-5 py-5 font-weight-bold">shopping cart</h2>
 			<c:choose>
 				<c:when test="${sessionScope.cart != null && sessionScope.cart.vectors.size() > 0}">
-					<div class = "row border-bottom shadow-sm pt-2 pb-3 mb-2 font-weight-bold">
+					<div class = "row border-bottom shadow-sm pt-4 pb-0 mb-2 font-weight-bold">
 						<div class="col-md-6 pl-5">
 							<p>Product</p>
 						</div>
@@ -59,44 +61,68 @@ $(document).ready(function(){
 						</div>
 					</div>
 					
-					<c:forEach items="${sessionScope.cart.vectors}" var="item" varStatus="loop">
-						<div class = "row border-bottom mb-1 pb-1">
-							<div class="col-md-6">
-								<div class="d-flex">
-									<img class="img-fluid" alt="${item.name}" src="image/${item.imgPath}" style="max-width:68.8px; max-height:68.8px;">
-									<div class = "d-flex align-items-center ml-3">
-										<p class="text-center font-weight-bold">${item.name}</p>
+					<div id ="shoppingCart" class="mb-5">
+						<c:forEach items="${sessionScope.cart.vectors}" var="item" varStatus="loop">
+							<div class = "row border-bottom mb-1 pb-1">
+								<div class="col-md-6">
+									<div class="d-flex">
+										<img class="img-fluid" alt="${item.name}" src="image/${item.imgPath}" style="max-width:68.8px; max-height:68.8px;">
+										<div class = "d-flex align-items-center ml-3">
+											<p class="text-center font-weight-bold">${item.name}</p>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-md-2">
-								<div>
-								<p class="text-sm-center pt-3">${item.price}</p>
+								<div class="col-md-2">
+									<div>
+									<p class="text-sm-center pt-3">${item.price}</p>
+									</div>
 								</div>
-							</div>
-							<div class="col-md-2">
-								
-								<form class="form-inline mt-2">
-						            <div class="btn-group" role="group">
-							            <button type="button" id="quantityDown" class="quantityDown btn btn-danger">-</button>
-							            <input type="text" class="form-control" value="${item.quantity}" style="max-width:50px;"/>
-						         
-							            <button type="button" id="quantityUp" class="quantityUp btn btn-success">+</button>
-						       		</div>
-							      </form>
-							</div>
-							<div class="col-md-2">
-								<div>
-									<p class="text-sm-center pt-3">CHF
-										<fmt:formatNumber value="${item.quantity*item.price}" maxFractionDigits="2" />
-									</p>
+								<div class="col-md-2">
+									
+									<form id="form${item.id}" action="cart" method="post" class="form-inline mt-2">
+							            <div class="btn-group" role="group">
+								            <button type="button" id="${item.id}" class="quantityDown btn btn-danger">-</button>
+								            <input  type="text" class="form-control" name="quantity" value="${item.quantity}" style="max-width:50px;"/>
+							        		<input  type="hidden" class="form-control" name="id" value="${item.id}" style="max-width:50px;"/>
+								            <button type="button" id="${item.id}" class="quantityUp btn btn-success">+</button>
+								            <input type="hidden" name="_method" value="put" />
+							       		</div>
+								      </form>
 								</div>
-							</div>
+								<div class="col-md-2">
+									<div>
+										<p class="text-sm-center pt-3">CHF
+											<fmt:formatNumber value="${item.quantity*item.price}" maxFractionDigits="2" />
+										</p>
+									</div>
+								</div>
+						</div>
+						</c:forEach>
+						
 					</div>
-					</c:forEach>
+					<div class ="clearfix">
+						<c:set var="subTotal" value="${0}"/>
+						<c:forEach var="item" items="${sessionScope.cart.vectors}" varStatus="counter">
+							<c:set var="subTotal" value="${subTotal + item.price*item.quantity}" />
+						</c:forEach>
+						<div class ="float-right">
+							<p class="muted text-uppercase text-center"> Subtotal: 
+								<span class="font-weight-bold">
+									CHF <fmt:formatNumber value="${subTotal}" maxFractionDigits="2" />
+								</span>
+							</p>
+						</div>
+					</div>
+					<div class="clearfix">
+						<div class = "float-right">
+							<a type="button" href="" class="btn btn-danger text-uppercase text-white px-5 py-2 font-weight-bold">Checkout</a>
+						</div>
+					</div>
+					
+					
 				</c:when>
 				<c:otherwise>
-					<p class="lead text-center"> Your shopping cart is empty</p>
+					<p class="lead text-center">Your shopping cart is empty</p>
 				</c:otherwise>
 			</c:choose>
 				

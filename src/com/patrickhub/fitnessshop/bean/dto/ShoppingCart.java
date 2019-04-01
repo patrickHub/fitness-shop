@@ -53,21 +53,28 @@ public class ShoppingCart {
 	/**
 	 * remove an itemCart from the shopping cart.
 	 * 
-	 * @param index index of the item to remove
+	 * @param id id of the item to update
+	 * @param quantity
 	 */
-	public synchronized void removeItem(ItemCart item) {
+	public synchronized void updateItemById(int id, int quantity) {
 		
-		/*// get the item from vectors
-		ItemCart item = vectors.get(index);
-		
-		// remove the item from vectors if the quantity reaches zero
-		if(item.getQuantity() -1 <= 0) {
-			vectors.removeElementAt(index);
-			return;
+		// check vector to update quantity item
+		for(ItemCart item: vectors) {
+			if(item.getId() == id) {
+				// get the current index
+				int index = vectors.indexOf(item);
+				
+				if(quantity > 0) {
+					//the quantity is more than zero then update quantity
+					vectors.get(index).setQuantity(quantity);
+					return;
+				}
+				
+				// the quantity is zero then delete item
+				vectors.remove(index);
+				return;
+			}
 		}
-		
-		// the item quantity is more than one then decrement the quantity
-		item.setQuantity(item.getQuantity() - 1);*/
 	}
 
 
