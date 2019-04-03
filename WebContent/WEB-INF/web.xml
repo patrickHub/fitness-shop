@@ -37,6 +37,14 @@
   	<servlet-name>OrderServlet</servlet-name>
   	<url-pattern>/order</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>CheckoutAddressServlet</servlet-name>
+  	<servlet-class>com.patrickhub.fitnessshop.servlet.CheckoutAddressServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>CheckoutAddressServlet</servlet-name>
+  	<url-pattern>/checkout</url-pattern>
+  </servlet-mapping>
   
   <filter>
   	<filter-name>URLFilter</filter-name>

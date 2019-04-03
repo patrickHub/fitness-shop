@@ -115,14 +115,16 @@ $(document).ready(function(){
 					</div>
 					<div class="clearfix">
 						<div class = "float-right">
-							<a type="button" href="" class="btn btn-danger text-uppercase text-white px-5 py-2 font-weight-bold">Checkout</a>
+							<a href="checkout" class="btn btn-danger text-uppercase text-white px-5 py-2 font-weight-bold">Checkout</a>
 						</div>
 					</div>
 					
 					
 				</c:when>
 				<c:otherwise>
-					<p class="lead text-center">Your shopping cart is empty</p>
+					<div>
+						<p class="lead text-center">Your shopping cart is empty</p>
+					</div>
 				</c:otherwise>
 			</c:choose>
 				
