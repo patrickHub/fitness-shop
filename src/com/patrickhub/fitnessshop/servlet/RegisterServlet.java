@@ -21,6 +21,7 @@ import com.patrickhub.fitnessshop.dao.CustomerDao;
 import com.patrickhub.fitnessshop.dao.UserDao;
 import com.patrickhub.fitnessshop.util.Fields;
 import com.patrickhub.fitnessshop.util.Utils;
+import com.patrickhub.fitnessshop.validation.Validation;
 
 /**
  * 
@@ -40,7 +41,7 @@ public class RegisterServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		// validate request parameters and get errors messages
-		Map<String, String> errors = Utils.validateField(req);
+		Map<String, String> errors = Validation.validateSignUpForm(req);
 		
 		
 		if(errors.size() == 0) { // all parameters are valid
@@ -73,6 +74,7 @@ public class RegisterServlet extends HttpServlet{
 				
 				// register new customer credentials
 				user = userDao.registerUser(connection, user);
+				System.out.println("Register username successfully!");
 				
 				// register new customer billing informations
 				CustomerDao customerDao = new CustomerDao();
@@ -82,8 +84,10 @@ public class RegisterServlet extends HttpServlet{
 				AddressDao addressDao = new AddressDao();
 				address = addressDao.registerAddress(connection, address, customer.getId());
 				
-				// redirect the user to the login.jsp to sign-in
+				// redirect the user to the login.jsp to sign-in with success message
+				req.setAttribute("isRegistered", true);
 				req.getRequestDispatcher("jsp/login.jsp").forward(req, resp);
+				return;
 				
 			}else {
 				errors.put(Fields.USERNAME.toString(), "Username: " + username + " is not available!");

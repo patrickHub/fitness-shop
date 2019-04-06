@@ -37,5 +37,10 @@ public class HomeServlet extends HttpServlet{
 		// passe the control to the index.jsp
 		req.getRequestDispatcher("/jsp/index.jsp").forward(req, resp);
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
+	}
 
 }
