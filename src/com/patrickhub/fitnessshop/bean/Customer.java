@@ -13,8 +13,17 @@ public class Customer {
 	private String firstName;
 	private String lastName;
 	private String email;
-	private String password;
-	private Date birthDate;
+	private String phone;
+	private Date birthdate;
+	
+	public Customer(String firstName, String lastName, String email, String phone, Date birthdate) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.phone = phone;
+		this.birthdate = birthdate;
+	}
 	public int getId() {
 		return id;
 	}
@@ -39,17 +48,17 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPassword() {
-		return password;
+	public String getPhone() {
+		return phone;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
-	public Date getBirthDate() {
-		return birthDate;
+	public Date getBirthdate() {
+		return birthdate;
 	}
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate;
 	}
 	
 	

@@ -14,27 +14,50 @@ CREATE TABLE products(
 );
 
 
-drop table products;
+drop table customers;
+
+CREATE TABLE users(
+	userID INT AUTO_INCREMENT,
+	username VARCHAR (10) UNIQUE NOT NULL ,
+    password VARCHAR (10) NOT NULL,
+    
+    CONSTRAINT users_PK PRIMARY KEY (userID)
+);
 
 CREATE TABLE customers(
 	customerID INT AUTO_INCREMENT,
     customerFirstName VARCHAR(30) NOT NULL,
     customerLastName VARCHAR(30) NOT NULL,
-	customerEmail VARCHAR(30) UNIQUE NOT NULL,
-    customerPassword VARCHAR(10) NOT NULL,
+	customerEmail VARCHAR(30) NOT NULL,
+    customerPhone VARCHAR(10) NOT NULL,
     customerBirthdate DATE NOT NULL,
+    userID INT,
     
-    CONSTRAINT Customer_PK PRIMARY KEY (customerID)
+    CONSTRAINT Customer_PK PRIMARY KEY (customerID),
+    CONSTRAINT Customer_User_FK FOREIGN KEY (userID) REFERENCES users(userID)
     
+);
+
+CREATE TABLE address(
+
+	addressID INT AUTO_INCREMENT,
+    addressStreet VARCHAR(30),
+    addressZipCode VARCHAR (10),
+    addressCity VARCHAR(30),
+    addressCountry VARCHAR(50),
+    customerID INT,
+    
+    CONSTRAINT Address_PK PRIMARY KEY (addressID),
+    CONSTRAINT Address_Customer_FK FOREIGN KEY (customerID) REFERENCES customers(customerID)
 );
 
 CREATE TABLE orders(
 	orderID INT AUTO_INCREMENT,
-    customerID INT,
+    addressID INT,
     orderDate DATE NOT NULL,
     
     CONSTRAINT Order_PK PRIMARY KEY (orderID),
-    CONSTRAINT Order_Customer_FK FOREIGN KEY (customerID) REFERENCES customers(customerID)
+    CONSTRAINT Order_Address_FK FOREIGN KEY (addressID) REFERENCES address(addressID)
 );
 
 CREATE TABLE orderItems(
