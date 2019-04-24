@@ -34,13 +34,22 @@ public class ProductServlet extends HttpServlet {
 		
 		// get the "id" product
 		ProductDao productDao = new ProductDao();
-		Product product = productDao.findById(connection, Integer.parseInt(id));
-		System.out.println("Return Product: " + product);
-		
-		// pass the control to product.jsp
-		req.setAttribute("product", product);
-		req.getRequestDispatcher("jsp/product.jsp").forward(req, resp);
-		
+		try {
+			// check id validity
+			Product product = productDao.findById(connection, Integer.parseInt(id));
+			
+			if(product == null) { // the id does not exist
+				req.getRequestDispatcher("").forward(req, resp);
+				return;
+			}
+			// pass the control to product.jsp
+			req.setAttribute("product", product);
+			req.getRequestDispatcher("jsp/product.jsp").forward(req, resp);
+			
+		}catch (NumberFormatException e) { // the id is not valid
+			req.getRequestDispatcher("").forward(req, resp);
+			return;
+		}
 	}
 	
 	

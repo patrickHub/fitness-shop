@@ -17,6 +17,8 @@
   </servlet>
   <servlet-mapping>
   	<servlet-name>HomeServlet</servlet-name>
+  	<url-pattern></url-pattern>
+  	<url-pattern>/shop</url-pattern>
   	<url-pattern>/home</url-pattern>
   </servlet-mapping>
   
@@ -38,12 +40,20 @@
   	<url-pattern>/order</url-pattern>
   </servlet-mapping>
   <servlet>
+  	<servlet-name>CheckoutShippingServlet</servlet-name>
+  	<servlet-class>com.patrickhub.fitnessshop.servlet.CheckoutShippingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>CheckoutShippingServlet</servlet-name>
+  	<url-pattern>/checkout</url-pattern>
+  </servlet-mapping>
+  <servlet>
   	<servlet-name>CheckoutAddressServlet</servlet-name>
   	<servlet-class>com.patrickhub.fitnessshop.servlet.CheckoutAddressServlet</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>CheckoutAddressServlet</servlet-name>
-  	<url-pattern>/checkout</url-pattern>
+  	<url-pattern>/checkout-address</url-pattern>
   </servlet-mapping>
   <servlet>
  	<servlet-name>LoginServlet</servlet-name>
@@ -69,6 +79,14 @@
   <filter-mapping>
   	<filter-name>URLFilter</filter-name>
   	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter>
+  	<filter-name>LoginFilter</filter-name>
+  	<filter-class>com.patrickhub.fitnessshop.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>LoginFilter</filter-name>
+  	<url-pattern>/login</url-pattern>
   </filter-mapping>
   
 </web-app>

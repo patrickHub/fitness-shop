@@ -13,7 +13,12 @@ public enum Fields {
 	STREET("street"),
 	ZIPCODE("zipCode"),
 	CITY("city"),
-	QUANTITY("quantity");
+	QUANTITY("quantity"),
+	NAME("name"),
+	ID("id"),
+	PRICE("price"),
+	DESCRIPTION("description"),
+	IMGPATH("imgPath");
 	
 	
 	private final String field;

@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.patrickhub.fitnessshop.bean.Address;
 import com.patrickhub.fitnessshop.bean.Customer;
@@ -70,7 +71,7 @@ public class RegisterServlet extends HttpServlet{
 				// create beans
 				User user = new User(username, password);
 				Customer customer = new Customer(firstName, lastName, email, phone, Utils.formatDate(birthdate));
-				Address address = new Address(street, zipCode, city, country);
+				Address address = new Address(street, zipCode, city, country, Address.Status.PRINCIPALE.toString());
 				
 				// register new customer credentials
 				user = userDao.registerUser(connection, user);
@@ -83,6 +84,17 @@ public class RegisterServlet extends HttpServlet{
 				// register new customer address
 				AddressDao addressDao = new AddressDao();
 				address = addressDao.registerAddress(connection, address, customer.getId());
+				
+				// verify that user has checkout
+				HttpSession session = req.getSession();
+				String checkout = (String)session.getAttribute("checkout");
+				if(checkout != null) {
+					System.out.println("Checkout has been visted in register");
+					// then send user to checkout his cart
+					session.setAttribute("username", user.getUsername());
+					req.getRequestDispatcher("checkout").forward(req, resp);
+					return;
+				}
 				
 				// redirect the user to the login.jsp to sign-in with success message
 				req.setAttribute("isRegistered", true);

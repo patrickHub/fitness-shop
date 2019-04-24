@@ -5,7 +5,6 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Fitness Shop</title>
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
 	<!-- header -->
@@ -19,9 +18,5 @@
 	
 	<!-- footer -->
 	<%@include file="footer.jsp" %>
-	
-	<script type="text/javascript" src="js/jquery-3.3.1.slim.min.js"></script>
-	<script type="text/javascript" src="js/popper.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 </body>
 </html>

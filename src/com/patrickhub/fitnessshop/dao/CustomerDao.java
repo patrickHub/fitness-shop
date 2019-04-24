@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.patrickhub.fitnessshop.bean.Address;
 import com.patrickhub.fitnessshop.bean.Customer;
 import com.patrickhub.fitnessshop.bean.User;
 
@@ -70,6 +71,79 @@ public class CustomerDao {
 			LOG.log(Level.SEVERE, e, null);
 		}
 		
+		return customer;
+	}
+	
+	/**
+	 * update a customer.
+	 * 
+	 * @param connection connection to the database
+	 * @param customer customer to update
+	 * @return persisted customer
+	 */
+	public Customer updateCustomer(Connection connection, Customer customer) {
+		try {
+			
+			// write the SQL update
+			String sql = "UPDATE customers SET customerFirstName = ?, customerLastName = ?,"
+								+ " customerEmail = ?, customerPhone = ?,"
+								+ " customerBirthdate = ?;";
+			// get preparedStatement
+			PreparedStatement statement = connection.prepareStatement(sql);
+		    // set SQL parameters
+			statement.setString(1,  customer.getFirstName());
+			statement.setString(2, customer.getLastName());
+			statement.setString(3, customer.getEmail());
+			statement.setString(4, customer.getPhone());
+			statement.setDate(5, new Date(customer.getBirthdate().getTime()));
+			
+			// execute the query
+			statement.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			LOG.log(Level.SEVERE, e, null);
+		}
+		
+		return customer;
+	}
+	
+	/**
+	 * get a customer by username.
+	 * 
+	 * @param connection connection to the database
+	 * @param username customer username
+	 * @return persisted customer
+	 */
+	public Customer getCustomerByUsername(Connection connection, String username) {
+		Customer customer = null;
+		try {
+			// write the sql query
+			String sql = "SELECT * FROM users "
+							+ "INNER JOIN customers "
+								+ "ON customers.userID=users.userID "
+									+ "WHERE username = ?;";
+			// get preparedStatement
+			PreparedStatement statement = connection.prepareStatement(sql);
+		    // set SQL parameters
+			statement.setString(1,  username);
+			
+			// execute the query
+			ResultSet set = statement.executeQuery();
+			/*ustomerFirstName, customerLastName,"
+								+ " customerEmail, customerPhone, customerBirthdate, userID*/
+			while(set.next()) {
+				customer = new Customer();
+				customer.setId(set.getInt("customerID"));
+				customer.setFirstName(set.getString("customerFirstName"));
+				customer.setLastName(set.getString("customerLastName"));
+				customer.setEmail(set.getString("customerEmail"));
+				customer.setPhone(set.getString("customerPhone"));
+				customer.setBirthdate(set.getDate("customerBirthdate"));
+			}
+		}catch(SQLException ex) {
+			LOG.log(Level.SEVERE, ex, null);
+		}
 		return customer;
 	}
 

@@ -11,31 +11,11 @@
 <title>Fitness Shop</title>
 <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-
-	$('.quantityUp').on('click',function(){
-    	currentQuantityInput = $(this).prev().prev();
-    	currentQuantityInput.val(parseInt(currentQuantityInput.val())+1);
-    	document.getElementById('form'+this.id).submit()
-    });
-    $('.quantityDown').on('click',function(){
-    	currentQuantityInput = $(this).next();
-    	currentQuantityInput.val(parseInt(currentQuantityInput.val())-1);
-    	document.getElementById('form'+this.id).submit()
-    });
-
-	$('#checkoutOut').click(function(){
-    	$('#shoppingCart form').each(function () {
-    	    this.submit();
-     	});
-    		
-
-    });
-
-});
+	$(document).ready(function(){
+		updateProductQuantityInCart();
+	});
 </script>
 </head>
 <body>
@@ -136,8 +116,5 @@ $(document).ready(function(){
 	
 	<!-- footer -->
 	<%@include file="footer.jsp" %>
-	<script type="text/javascript" src="js/jquery-3.3.1.slim.min.js"></script>
-	<script type="text/javascript" src="js/popper.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 </body>
 </html>

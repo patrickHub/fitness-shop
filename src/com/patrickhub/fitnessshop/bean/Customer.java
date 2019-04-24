@@ -16,6 +16,8 @@ public class Customer {
 	private String phone;
 	private Date birthdate;
 	
+	public Customer() {}
+	
 	public Customer(String firstName, String lastName, String email, String phone, Date birthdate) {
 		super();
 		this.firstName = firstName;

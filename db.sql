@@ -13,8 +13,11 @@ CREATE TABLE products(
     
 );
 
-
+drop table orderitems;
+drop table orders;
+drop table address;
 drop table customers;
+drop table users;
 
 CREATE TABLE users(
 	userID INT AUTO_INCREMENT,
@@ -38,6 +41,8 @@ CREATE TABLE customers(
     
 );
 
+
+
 CREATE TABLE address(
 
 	addressID INT AUTO_INCREMENT,
@@ -46,6 +51,7 @@ CREATE TABLE address(
     addressCity VARCHAR(30),
     addressCountry VARCHAR(50),
     customerID INT,
+    addressStatus VARCHAR(10),
     
     CONSTRAINT Address_PK PRIMARY KEY (addressID),
     CONSTRAINT Address_Customer_FK FOREIGN KEY (customerID) REFERENCES customers(customerID)

@@ -14,15 +14,19 @@ public class Address {
 	private String zipCode;
 	private String city;
 	private String country;
+	private String status;
 	
-	public Address(String street, String zipCode, String city, String country) {
+	public Address() {}
+	
+	public Address(String street, String zipCode, String city, String country, String status) {
 		super();
 		this.street = street;
 		this.zipCode = zipCode;
 		this.city = city;
 		this.country = country;
+		this.status = status;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -53,8 +57,33 @@ public class Address {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	
-	
-	
+	public static enum Status  {
+		PRINCIPALE("principale"),
+		SECONDARY("secondary");
+		
+		
+		private final String status;
+		
+		/**
+		 * private constructor.
+		 * 
+		 * @param status
+		 */
+		private Status(final String status) {
+			this.status = status;
+		}
+		
+		@Override
+		public String toString() {
+			return status;
+		}
+	}	
 	
 }

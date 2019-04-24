@@ -20,6 +20,95 @@ import com.patrickhub.fitnessshop.util.Fields;
  *
  */
 public class Validation {
+	
+	/**
+	 * Check parameters validity when update product quantity in cart.
+	 * 
+	 * @param req HttpServletRequest
+	 * @return Map of errors
+	 */
+	public static Map<String, String> validateUpdateCartProductForm(HttpServletRequest req){
+		
+		Map<String, String> errors = new HashMap<String, String>();
+		
+		if(req.getParameter(Fields.ID.toString()) == null ||req.getParameter(Fields.ID.toString()) == "" ) {
+			errors.put(Fields.ID.toString(), "Please provide a valid product ID");
+		}else {
+			try {
+				Integer.parseInt(req.getParameter(Fields.ID.toString()));
+			}catch (NumberFormatException e) {
+				errors.put(Fields.ID.toString(), "Please provide a valid product ID");
+			}
+		}
+		
+		if(req.getParameter(Fields.QUANTITY.toString()) == null ||req.getParameter(Fields.QUANTITY.toString()) == "" ) {
+			errors.put(Fields.QUANTITY.toString(), "Please provide a valid product quantity");
+		}else {
+			try {
+				int quantity = Integer.parseInt(req.getParameter(Fields.QUANTITY.toString()));
+			}catch (NumberFormatException e) {
+				errors.put(Fields.QUANTITY.toString(), "Please provide a valid product quantity");
+			}
+		}
+		return errors;
+		
+	}
+	
+	/**
+	 * Check parameters validity when add new product in cart.
+	 * 
+	 * @param req HttpServletRequest
+	 * @return Map of errors
+	 */
+	public static Map<String, String> validateNewCartProductForm(HttpServletRequest req){
+		
+		Map<String, String> errors = new HashMap<String, String>();
+		if(req.getParameter(Fields.NAME.toString()) == null ||req.getParameter(Fields.NAME.toString()) == "" ) {
+			errors.put(Fields.NAME.toString(), "Please provide a valid product name");
+		}
+		if(req.getParameter(Fields.DESCRIPTION.toString()) == null ||req.getParameter(Fields.DESCRIPTION.toString()) == "" ) {
+			errors.put(Fields.DESCRIPTION.toString(), "Please provide a valid product description");
+		}
+		if(req.getParameter(Fields.IMGPATH.toString()) == null ||req.getParameter(Fields.IMGPATH.toString()) == "" ) {
+			errors.put(Fields.IMGPATH.toString(), "Please provide a valid product path image");
+		}
+		
+		if(req.getParameter(Fields.ID.toString()) == null ||req.getParameter(Fields.ID.toString()) == "" ) {
+			errors.put(Fields.ID.toString(), "Please provide a valid product ID");
+		}else {
+			try {
+				Integer.parseInt(req.getParameter(Fields.ID.toString()));
+			}catch (NumberFormatException e) {
+				errors.put(Fields.ID.toString(), "Please provide a valid product ID");
+			}
+		}
+		
+		String quantity = req.getParameter(Fields.QUANTITY.toString());
+		if(quantity == null || quantity == "" ) {
+			errors.put(Fields.QUANTITY.toString(), "Please provide a valid product quantity");
+		}else {
+			try {
+				Integer.parseInt(req.getParameter(Fields.QUANTITY.toString()));
+			}catch (NumberFormatException e) {
+				errors.put(Fields.QUANTITY.toString(), "Please provide a valid product quantity");
+			}
+		}
+		
+		if(req.getParameter(Fields.PRICE.toString()) == null ||req.getParameter(Fields.PRICE.toString()) == "" ) {
+			errors.put(Fields.PRICE.toString(), "Please provide a valid product price");
+		}else {
+			try {
+				Float.parseFloat(req.getParameter(Fields.PRICE.toString()));
+			}catch (NumberFormatException e) {
+				errors.put(Fields.PRICE.toString(), "Please provide a valid product price");
+			}
+			
+		}
+		
+		return errors;
+		
+	}
+	
 
 	
 	/**

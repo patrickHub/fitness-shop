@@ -5,30 +5,6 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
-<script type="text/javascript">
-	
-	function validateForm(){
-		
-		// check weither username input is provided
-		var username = document.getElementById('username');
-		if(username.value.length<=0){
-			document.getElementById("usernameError").innerHTML = "please provide a username!";
-			return false;
-		}
-		document.getElementById("usernameError").innerHTML = "";
-		
-		// check weather password input is provided
-		var password = document.getElementById('password');
-		if(password.value.length<=0){
-			document.getElementById("passwordError").innerHTML = "please provide a password!";
-			return false;
-		}
-		document.getElementById("passwordError").innerHTML = "";
-		return true;
-	}
-	
-</script>
 <title>Login | Fitness-Shop</title>
 </head>
 <body>
@@ -52,7 +28,7 @@
 						<div class ="col-md-2">
 						</div>
 						<div class="col-md-4 rounded-pill">
-							<form class="form mt-2 mb-5 p-5 d-flex align-items-center flex-column bg-white border shadow-sm rounded" action="login" method="post" onsubmit="return validateForm()">
+							<form class="form mt-2 mb-5 p-5 d-flex align-items-center flex-column bg-white border shadow-sm rounded" action="login" method="post" onsubmit="return validateLoginForm()">
 								<h2 class="font-weight-bold">Login</h2>
 								<div class="my-3">
 									<input id="username" name="username" class="form-control rounded-pill" type="text" placeholder="Username" autofocus style="max-width:350px;" />
@@ -85,8 +61,5 @@
 	
 	<!-- footer -->
 	<%@include file="footer.jsp" %>
-	<script type="text/javascript" src="js/jquery-3.3.1.slim.min.js"></script>
-	<script type="text/javascript" src="js/popper.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 </body>
 </html>

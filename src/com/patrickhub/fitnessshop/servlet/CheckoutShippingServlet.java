@@ -14,10 +14,17 @@ import com.patrickhub.fitnessshop.bean.Customer;
 import com.patrickhub.fitnessshop.dao.AddressDao;
 import com.patrickhub.fitnessshop.dao.CustomerDao;
 
-public class CheckoutAddressServlet extends HttpServlet{
+
+/**
+ * 
+ * @author PatrickHub
+ *
+ */
+public class CheckoutShippingServlet extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		// get session
 		HttpSession session = req.getSession();
 		// get username
@@ -33,10 +40,12 @@ public class CheckoutAddressServlet extends HttpServlet{
 		// get request dispatcher and send control to checkoutAddress.jsp
 		req.setAttribute("customer", customer);
 		req.setAttribute("address", address);
-		req.getRequestDispatcher("jsp/checkoutAddress.jsp").forward(req, resp);
+		req.getRequestDispatcher("jsp/checkoutShipping.jsp").forward(req, resp);
 	}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doGet(req, resp);
 	}
+
 }
