@@ -35,7 +35,7 @@
 				<div class="col-6">
 					<h2 class="blog-post-title text-uppercase mb-3"><%=product.getName()%></h2>
 					<h3 class="blog-post-title text-danger mb-3">CHF <%=product.getPrice() %></h3>
-					<form id="itemDescriptionForm" action="cart" method="post">
+					<form id="itemDescriptionForm" action="cart" method="post" onsubmit="return validateProductQuantityForm()">
 						<div>
 							<label class="text-uppercase" for="quantity">Quantity</label>
 							<input type="text" class="form-control bg-light" id="quantity" name="quantity" style="max-width:180px;">

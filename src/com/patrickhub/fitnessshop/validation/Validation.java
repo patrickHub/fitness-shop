@@ -133,22 +133,18 @@ public class Validation {
 		return errors;
 	}
 	
+	
 	/**
-	 * Check parameters validity in Sign-Up form.
+	 * Check parameters validity in checkout address form.
 	 * 
 	 * @param req HttpServletRequest
 	 * @return Map of errors
 	 */
-	public static Map<String, String> validateSignUpForm(HttpServletRequest req){
+	public static Map<String, String> validateAddressCheckoutForm(HttpServletRequest req){
 		
 		// get form parameters and check weather they are valid
-		String username = req.getParameter(Fields.USERNAME.toString());
-		String password = req.getParameter(Fields.PASSWORD.toString());
 		String firstName = req.getParameter(Fields.FIRSTNAME.toString());
 		String lastName = req.getParameter(Fields.LASTNAME.toString());
-		String email = req.getParameter(Fields.EMAIL.toString());
-		String phone = req.getParameter(Fields.PHONE.toString());
-		String birthdate = req.getParameter(Fields.BIRTHDATE.toString());
 		String country = req.getParameter(Fields.COUNTRY.toString());
 		String street = req.getParameter(Fields.STREET.toString());
 		String zipCode = req.getParameter(Fields.ZIPCODE.toString());
@@ -156,26 +152,11 @@ public class Validation {
 		
 		Map<String, String> errors = new HashMap<String, String>();
 		
-		if(username==null || username == "" || !username.matches(".*[a-zA-Z]+.*") || username.length()<5 || username.length()>10) {
-			errors.put(Fields.USERNAME.toString(), "Please provide a valid username");
-		}
-		if(password == null || password == "" || password.length()<5 || password.length()>10) {
-			errors.put(Fields.PASSWORD.toString(), "Please provide a valid password");
-		}
 		if(firstName == null || firstName == "" || firstName.length()>30) {
 			errors.put(Fields.FIRSTNAME.toString(), "Please provide a valid first name");
 		}
 		if(lastName == null || lastName == "" || lastName.length()>30) {
 			errors.put(Fields.LASTNAME.toString(), "Please provide a valid last Name");
-		}
-		if(email == null || email == "" || email.length()>30 || !isValidEmail(email)) {
-			errors.put(Fields.EMAIL.toString(), "Please provide a valid email");
-		}
-		if(phone == null || phone == "" || !phone.matches("^[0-9]{10}$")) {
-			errors.put(Fields.PHONE.toString(), "Please provide a valid phone");
-		}
-		if(!isValidDate(birthdate)) {
-			errors.put(Fields.BIRTHDATE.toString(), "Please provide a valid birthdate");
 		}
 		if(country == null || country == "" || country.length()>30) {
 			errors.put(Fields.COUNTRY.toString(), "Please provide a valid country");
@@ -189,6 +170,47 @@ public class Validation {
 		if(city == null || city == "" || city.length()>30 || !city.matches(".*[a-zA-Z]+.*")) {
 			errors.put(Fields.CITY.toString(), "Please provide a valid city");
 		}
+		return errors;
+	}
+	
+
+	
+	
+	
+	/**
+	 * Check parameters validity in Sign-Up form.
+	 * 
+	 * @param req HttpServletRequest
+	 * @return Map of errors
+	 */
+	public static Map<String, String> validateSignUpForm(HttpServletRequest req){
+		
+		// get form parameters and check weather they are valid
+		String username = req.getParameter(Fields.USERNAME.toString());
+		String password = req.getParameter(Fields.PASSWORD.toString());
+		String email = req.getParameter(Fields.EMAIL.toString());
+		String phone = req.getParameter(Fields.PHONE.toString());
+		String birthdate = req.getParameter(Fields.BIRTHDATE.toString());
+		
+		Map<String, String> errors = validateAddressCheckoutForm(req);
+		
+		if(username==null || username == "" || !username.matches(".*[a-zA-Z]+.*") || username.length()<5 || username.length()>10) {
+			errors.put(Fields.USERNAME.toString(), "Please provide a valid username");
+		}
+		if(password == null || password == "" || password.length()<5 || password.length()>10) {
+			errors.put(Fields.PASSWORD.toString(), "Please provide a valid password");
+		}
+		
+		if(email == null || email == "" || email.length()>30 || !isValidEmail(email)) {
+			errors.put(Fields.EMAIL.toString(), "Please provide a valid email");
+		}
+		if(phone == null || phone == "" || !phone.matches("^[0-9]{10}$")) {
+			errors.put(Fields.PHONE.toString(), "Please provide a valid phone");
+		}
+		if(!isValidDate(birthdate)) {
+			errors.put(Fields.BIRTHDATE.toString(), "Please provide a valid birthdate");
+		}
+		
 		return errors;
 	}
 	

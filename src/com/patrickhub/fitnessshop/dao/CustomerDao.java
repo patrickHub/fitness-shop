@@ -87,7 +87,7 @@ public class CustomerDao {
 			// write the SQL update
 			String sql = "UPDATE customers SET customerFirstName = ?, customerLastName = ?,"
 								+ " customerEmail = ?, customerPhone = ?,"
-								+ " customerBirthdate = ?;";
+								+ " customerBirthdate = ? WHERE customerID = ?;";
 			// get preparedStatement
 			PreparedStatement statement = connection.prepareStatement(sql);
 		    // set SQL parameters
@@ -96,6 +96,7 @@ public class CustomerDao {
 			statement.setString(3, customer.getEmail());
 			statement.setString(4, customer.getPhone());
 			statement.setDate(5, new Date(customer.getBirthdate().getTime()));
+			statement.setInt(6, customer.getId());
 			
 			// execute the query
 			statement.executeUpdate();

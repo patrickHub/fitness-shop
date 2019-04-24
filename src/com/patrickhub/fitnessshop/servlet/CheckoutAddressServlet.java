@@ -2,6 +2,7 @@ package com.patrickhub.fitnessshop.servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +14,8 @@ import com.patrickhub.fitnessshop.bean.Address;
 import com.patrickhub.fitnessshop.bean.Customer;
 import com.patrickhub.fitnessshop.dao.AddressDao;
 import com.patrickhub.fitnessshop.dao.CustomerDao;
+import com.patrickhub.fitnessshop.util.Fields;
+import com.patrickhub.fitnessshop.validation.Validation;
 
 public class CheckoutAddressServlet extends HttpServlet{
 	
@@ -37,6 +40,51 @@ public class CheckoutAddressServlet extends HttpServlet{
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doGet(req, resp);
+		// get session
+		HttpSession session  = req.getSession();
+		// get usrname
+		String username = (String) session.getAttribute(Fields.USERNAME.toString());
+		
+		// validate request parameters and get errors messages
+		Map<String, String> errors = Validation.validateAddressCheckoutForm(req);
+		
+		if(errors.size() == 0) { // all parameters are valid
+		
+			// get request parameters
+			String firstName = req.getParameter(Fields.FIRSTNAME.toString());
+			String lastName = req.getParameter(Fields.LASTNAME.toString());
+			String country = req.getParameter(Fields.COUNTRY.toString());
+			String street = req.getParameter(Fields.STREET.toString());
+			String zipCode = req.getParameter(Fields.ZIPCODE.toString());
+			String city = req.getParameter(Fields.CITY.toString());
+			
+			// get user informations
+			Connection connection = (Connection)getServletContext().getAttribute("connection");
+			CustomerDao customerDao = new CustomerDao();
+			AddressDao addressDao = new AddressDao();
+			Customer customer = customerDao.getCustomerByUsername(connection, username);
+			Address address = addressDao.getAddressByCustomerId(connection, customer.getId());
+			
+			// set customer first and last Name
+			customer.setFirstName(firstName);
+			customer.setLastName(lastName);
+			customerDao.updateCustomer(connection, customer);
+			
+			// change the customer address status to secondary
+			address.setStatus(Address.Status.SECONDARY.toString());
+			addressDao.updateAddress(connection, address);
+			
+			// register the new address as the principal address of the customer
+			Address newAddress = new Address(street, zipCode, city, country, Address.Status.PRINCIPALE.toString());
+			addressDao.registerAddress(connection, newAddress, customer.getId());
+			
+			// sent user to proceed with checkout
+			req.getRequestDispatcher("checkout").forward(req, resp);
+			return;
+		}
+		req.setAttribute("errors", errors);
+		req.getRequestDispatcher("jsp/checkoutAddress.jsp").forward(req, resp);
+		
+		
 	}
 }

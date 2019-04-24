@@ -1,3 +1,5 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.util.List"%>
@@ -11,6 +13,10 @@
 <title>Fitness Shop</title>
 </head>
 <body>
+
+	<%
+		Map<String, String> errors = (HashMap<String, String>)request.getAttribute("errors");
+	%>
 
 	<!-- header -->
 	<%@include file="header.jsp" %>
@@ -102,7 +108,8 @@
 							<span id="cityError" class="text-danger font-weight-bold">${errors.get("city")}</span>
 						</div>
 					</div>
-					<button class="btn btn-success btn-lg px-5 my-5 rounded-pill">Save</button>
+					<button class="btn btn-success btn-lg px-5 my-5 rounded-pill text-uppercase">Save</button>
+					<a class="ml-3 mt-2 text-danger text-uppercase" href="checkout">Cancel</a>
 				</form>
 				
 			</div>
