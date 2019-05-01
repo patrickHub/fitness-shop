@@ -20,7 +20,7 @@ import com.patrickhub.fitnessshop.dao.CustomerDao;
  * @author PatrickHub
  *
  */
-public class CheckoutShippingServlet extends HttpServlet{
+public class CheckoutServlet extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,10 +37,10 @@ public class CheckoutShippingServlet extends HttpServlet{
 		Customer customer = customerDao.getCustomerByUsername(connection, username);
 		Address address = addressDao.getAddressByCustomerId(connection, customer.getId());
 		
-		// get request dispatcher and send control to checkoutAddress.jsp
+		// get request dispatcher and send control to checkout.jsp
 		req.setAttribute("customer", customer);
 		req.setAttribute("address", address);
-		req.getRequestDispatcher("jsp/checkoutShipping.jsp").forward(req, resp);
+		req.getRequestDispatcher("jsp/checkout.jsp").forward(req, resp);
 	}
 	
 	@Override

@@ -40,11 +40,11 @@
   	<url-pattern>/order</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<servlet-name>CheckoutShippingServlet</servlet-name>
-  	<servlet-class>com.patrickhub.fitnessshop.servlet.CheckoutShippingServlet</servlet-class>
+  	<servlet-name>CheckoutServlet</servlet-name>
+  	<servlet-class>com.patrickhub.fitnessshop.servlet.CheckoutServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>CheckoutShippingServlet</servlet-name>
+  	<servlet-name>CheckoutServlet</servlet-name>
   	<url-pattern>/checkout</url-pattern>
   </servlet-mapping>
   <servlet>
@@ -54,6 +54,14 @@
   <servlet-mapping>
   	<servlet-name>CheckoutAddressServlet</servlet-name>
   	<url-pattern>/checkout-address</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>CheckoutPaymentServlet</servlet-name>
+  	<servlet-class>com.patrickhub.fitnessshop.servlet.CheckoutPaymentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>CheckoutPaymentServlet</servlet-name>
+  	<url-pattern>/checkout-confirmation</url-pattern>
   </servlet-mapping>
   <servlet>
  	<servlet-name>LoginServlet</servlet-name>

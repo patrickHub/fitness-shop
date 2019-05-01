@@ -92,28 +92,30 @@
 						        <h6 class="my-0 font-weight-normal" style="margin-left: 5px;">Credit/Debit Card</h6>
 						      </div>
 						      <div class="card-body pl-5">
-						     	 <div class="row mb-3">
-							        <div class="col-md-8">
-							        	<label class="font-weight-bold" for="cardNumber">CARD NUMBER</label>
-										<input id="cardNumber" name="cardNumber" class="form-control rounded" type="text" placeholder="valid card number"/>
-										<span id="cardNumberError" class="text-danger font-weight-bold"></span>
-									</div>
-								 </div>
-								 <div class="row mb-5">
-									<div class="col-md-4">
-										<label class="font-weight-bold" for="expiryDate">EXPIRY DATE</label>
-										<div class="d-flex d-inline">
-											<input class="form-control" name="expiryDate" placeholder="MM"/>
-											<input class="form-control" placeholder="YY"/>
+						      	<form action="checkout-confirmation" method="post" class="">
+							     	 <div class="row mb-3">
+								        <div class="col-md-8">
+								        	<label class="font-weight-bold" for="cardNumber">CARD NUMBER</label>
+											<input id="cardNumber" name="cardNumber" class="form-control rounded" type="text" placeholder="valid card number"/>
+											<span id="cardNumberError" class="text-danger font-weight-bold"></span>
+										</div>
+									 </div>
+									 <div class="row mb-5">
+										<div class="col-md-4">
+											<label class="font-weight-bold" for="cardExpirationMonth">EXPIRY DATE</label>
+											<div class="d-flex d-inline">
+												<input class="form-control" name="cardExpirationMonth" placeholder="MM"/>
+												<input class="form-control" name="cardExpirationYear" placeholder="YY"/>
+											</div>
+										</div>
+											
+										<div class="col-md-3">
+											<label class="font-weight-bold" for="cardCVCode">CV CODE</label>
+											<input class="form-control" name="cardCVCode" placeholder="cv"/>
 										</div>
 									</div>
-										
-									<div class="col-md-3">
-										<label class="font-weight-bold" for="cvCode">CV CODE</label>
-										<input class="form-control" name="cvCode" placeholder="cv"/>
-									</div>
-								</div>
-						       	 <button type="button" class="btn btn-lg btn-danger text-uppercase">Complete your order</button>
+							       	<button class="btn btn-lg btn-danger text-uppercase">Complete your order</button>
+						       	 </form>
 						      </div>
 					    </div>
 					</div>

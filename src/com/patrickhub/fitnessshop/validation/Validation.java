@@ -21,6 +21,34 @@ import com.patrickhub.fitnessshop.util.Fields;
  */
 public class Validation {
 	
+	
+	/**
+	 * Check parameters validity in credit card form.
+	 * 
+	 * @param req HttpServletRequest
+	 * @return Map of errors
+	 */
+	public static Map<String, String> validateCreditCardForm(HttpServletRequest req){
+		
+		// get form parameters and check weather they are valid
+		String cardNumber = req.getParameter(Fields.CARDNUMBER.toString());
+		String expiredMonth = req.getParameter(Fields.CARDEXPIRATIONMONTH.toString());
+		String expiredYear = req.getParameter(Fields.CARDEXPIRATIONYEAR.toString());
+		String cvCode = req.getParameter(Fields.CARDCVCODE.toString());
+		Map<String, String> errors = new HashMap<String, String>();
+		
+		if(cardNumber==null || cardNumber == "") {
+			errors.put(Fields.CARDNUMBER.toString(), "Please provide a valid card number");
+		}
+		if(expiredMonth == null || expiredYear == null || expiredMonth == "" || expiredYear == "") {
+			errors.put(Fields.CARDEXPIRATIONMONTH.toString(), "Please provide valid expiration date");
+		}
+		if(cvCode == null || cvCode == "") {
+			errors.put(Fields.CARDCVCODE.toString(), "Please provide a valid CV code");
+		}
+		return errors;
+	}
+	
 	/**
 	 * Check parameters validity when update product quantity in cart.
 	 * 

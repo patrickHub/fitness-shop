@@ -57,13 +57,25 @@ CREATE TABLE address(
     CONSTRAINT Address_Customer_FK FOREIGN KEY (customerID) REFERENCES customers(customerID)
 );
 
+CREATE TABLE payments(
+	paymentID INT AUTO_INCREMENT,
+    paymentCardNumber VARCHAR(50),
+    paymentCartCV VARCHAR(5),
+    paymentCartExpired VARCHAR(10),
+    
+    CONSTRAINT Payment_PK PRIMARY KEY (paymentID)
+    
+);
+
 CREATE TABLE orders(
 	orderID INT AUTO_INCREMENT,
     addressID INT,
+    paymentID INT,
     orderDate DATE NOT NULL,
     
     CONSTRAINT Order_PK PRIMARY KEY (orderID),
-    CONSTRAINT Order_Address_FK FOREIGN KEY (addressID) REFERENCES address(addressID)
+    CONSTRAINT Order_Address_FK FOREIGN KEY (addressID) REFERENCES address(addressID),
+    CONSTRAINT Order_Payment_FK FOREIGN KEY (paymentID) REFERENCES payments(paymentID)
 );
 
 CREATE TABLE orderItems(

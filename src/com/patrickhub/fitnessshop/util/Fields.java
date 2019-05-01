@@ -18,7 +18,12 @@ public enum Fields {
 	ID("id"),
 	PRICE("price"),
 	DESCRIPTION("description"),
-	IMGPATH("imgPath");
+	IMGPATH("imgPath"),
+	CARDNUMBER("cardNumber"),
+	CARDEXPIRATIONYEAR("cardExpirationYear"),
+	CARDEXPIRATIONMONTH("cardExpirationMonth"),
+	CARDCVCODE("cardCVCode");
+	
 	
 	
 	private final String field;

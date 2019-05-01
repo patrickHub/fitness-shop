@@ -10,21 +10,33 @@ import java.util.Date;
 public class Order {
 
 	private int id;
-	private int customerId;
+	private int addressId;
+	private int paymentId;
 	private Date date;
 	
-	
+	public Order(int addressId, int paymentId, Date date) {
+		super();
+		this.addressId = addressId;
+		this.paymentId = paymentId;
+		this.date = date;
+	}
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getCustomerId() {
-		return customerId;
+	public int getAddressId() {
+		return addressId;
 	}
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setAddressId(int addressId) {
+		this.addressId = addressId;
+	}
+	public int getPaymentId() {
+		return paymentId;
+	}
+	public void setPaymentId(int paymentId) {
+		this.paymentId = paymentId;
 	}
 	public Date getDate() {
 		return date;
@@ -32,6 +44,7 @@ public class Order {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
 	
 	
 }
