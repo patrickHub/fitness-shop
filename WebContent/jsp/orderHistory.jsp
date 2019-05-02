@@ -15,11 +15,14 @@
 		<div class="container">
 			
 			<div class = "row border-bottom shadow-sm pt-4 pb-0 mb-2 font-weight-bold">
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<p class="text-center">Order ID</p>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<p class="text-center">Order Date</p>
+				</div>
+				<div class="col-md-2">
+					<p class="text-center">Order Price</p>
 				</div>
 				<div class="col-md-3">
 					<p class="text-center"> Order Status</p>
@@ -32,11 +35,14 @@
 			<div class="mb-5">
 				<c:forEach items="${requestScope.orders}" var="order" varStatus="loop">
 					<div class="row border-bottom border-left border-right mb-1 pb-1">
-						<div class="col-md-3">
-							<p class="text-center text-danger">${order.id}</p>
+						<div class="col-md-2">
+							<p class="text-center text-danger font-weight-bold">${order.id}</p>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<p class="text-center">${order.date}</p>
+						</div>
+						<div class="col-md-2">
+							<p class="text-center">${order.price}</p>
 						</div>
 						<div class="col-md-3 d-flex justify-content-center">
 							<span class="text-center px-3 py-2 bg-info border text-uppercase text-white">Shipped</span>

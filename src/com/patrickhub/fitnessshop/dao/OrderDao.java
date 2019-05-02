@@ -85,7 +85,7 @@ public class OrderDao {
 		try {
 			
 			// write the select sql
-			String sql = "SELECT orderID, orders.addressID, paymentID, orderDate "
+			String sql = "SELECT orders.orderID, SUM(orderItemQuantity*productPrice) AS price, orders.addressID, paymentID, orderDate "
 							+ "FROM users "
 								+ "INNER JOIN customers "
 									+ "ON users.userID = customers.userID "
@@ -93,7 +93,12 @@ public class OrderDao {
 									+ "ON customers.customerID = address.customerID "
 								+ "INNER JOIN orders "
 									+ "ON address.addressID = orders.addressID "
-									+ "WHERE username =?;";
+								+ "INNER JOIN orderitems "
+									+ "ON orders.orderID = orderitems.orderID " 
+								+ "INNER JOIN products " 
+									+ "ON orderitems.productID = products.productID "
+								+ "WHERE username =? "
+								+ "GROUP BY orders.orderID;";
 			
 			// get the prepare statement
 			PreparedStatement statement = connection.prepareStatement(sql);
@@ -109,6 +114,7 @@ public class OrderDao {
 				order.setAddressId(set.getInt("addressID"));
 				order.setPaymentId(set.getInt("paymentID"));
 				order.setDate(set.getDate("orderDate"));
+				order.setPrice(set.getFloat("price"));
 				
 				result.add(order);
 			}

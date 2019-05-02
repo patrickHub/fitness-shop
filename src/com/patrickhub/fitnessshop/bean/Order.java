@@ -13,6 +13,7 @@ public class Order {
 	private int addressId;
 	private int paymentId;
 	private Date date;
+	private float price;
 	
 	public Order() {}
 	
@@ -22,6 +23,7 @@ public class Order {
 		this.paymentId = paymentId;
 		this.date = date;
 	}
+	
 	public int getId() {
 		return id;
 	}
@@ -46,7 +48,14 @@ public class Order {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
+	}
+
 	
 	
 }
