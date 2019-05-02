@@ -6,10 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.patrickhub.fitnessshop.bean.Order;
+import com.patrickhub.fitnessshop.bean.Product;
 
 /**
  * 
@@ -66,6 +69,56 @@ public class OrderDao {
 		}
 		
 		return order;
+	}
+	
+	/**
+	 * find all Orders.
+	 * 
+	 * @param connection connection to the database
+	 * @return List of orders
+	 */
+	public List<Order> findOrderByUsername(Connection connection, String username){
+		
+		List<Order> result = new ArrayList<>();
+		LOG.info("Request to get all Orders");
+		
+		try {
+			
+			// write the select sql
+			String sql = "SELECT orderID, orders.addressID, paymentID, orderDate "
+							+ "FROM users "
+								+ "INNER JOIN customers "
+									+ "ON users.userID = customers.userID "
+								+ "INNER JOIN address "
+									+ "ON customers.customerID = address.customerID "
+								+ "INNER JOIN orders "
+									+ "ON address.addressID = orders.addressID "
+									+ "WHERE username =?;";
+			
+			// get the prepare statement
+			PreparedStatement statement = connection.prepareStatement(sql);
+			
+			// set query parameters
+			statement.setString(1, username);
+			
+			// execute the sql request
+			ResultSet set = statement.executeQuery();
+			while(set.next()) {
+				Order order = new Order();
+				order.setId(set.getInt("orderID"));
+				order.setAddressId(set.getInt("addressID"));
+				order.setPaymentId(set.getInt("paymentID"));
+				order.setDate(set.getDate("orderDate"));
+				
+				result.add(order);
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return result;
+		
 	}
 
 	

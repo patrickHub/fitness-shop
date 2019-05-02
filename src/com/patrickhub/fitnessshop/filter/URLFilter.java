@@ -71,8 +71,8 @@ public class URLFilter implements Filter{
 			}
 		}
 		
-		// verify home is accessible only when user has sign-in
-		if(req.getRequestURI().startsWith("/fitness-shop/home")) {
+		// verify home and view order are accessible only when user has sign-in
+		if(req.getRequestURI().startsWith("/fitness-shop/home") || req.getRequestURI().startsWith("/fitness-shop/order-history")) {
 			
 			// get username
 			String username = (String)req.getSession().getAttribute("username");

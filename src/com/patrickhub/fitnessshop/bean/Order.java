@@ -14,6 +14,8 @@ public class Order {
 	private int paymentId;
 	private Date date;
 	
+	public Order() {}
+	
 	public Order(int addressId, int paymentId, Date date) {
 		super();
 		this.addressId = addressId;

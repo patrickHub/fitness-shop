@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -71,7 +72,14 @@ public class CheckoutPaymentServlet extends HttpServlet {
 				orderItemDao.createOrderItem(connection, item, order.getId());
 			}
 			
+			// remove shopping cart from session
+			session.removeAttribute("cart");
+			
 			// get request dispatcher and send control to checkoutConfirmation.jsp
+			Vector<ItemCart> vectors = shoppingCart.getVectors();
+			req.setAttribute("vectors", vectors);
+			req.setAttribute("customer", customer);
+			req.setAttribute("address", address);
 			req.getRequestDispatcher("jsp/checkoutConfirmation.jsp").forward(req, resp);
 		}
 	}

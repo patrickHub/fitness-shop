@@ -22,7 +22,7 @@
 		  	<a class="p-2 text-dark" href="shop"><span class="oi oi-cart"></span>Shop</a>
 		    <a class="p-2 text-dark active text-lg" href="home">Home</a>
 		    <c:if test="${sessionScope.username!=null}">
-		   		 <a class="p-2 text-dark" href="#"><span class="oi oi-cart"></span>View orders</a>
+		   		 <a class="p-2 text-dark" href="order-history"><span class="oi oi-cart"></span>Orders History</a>
 		    </c:if>
 		    <a class="p-2 text-dark" href="#"> <img class="img-fluid" style="width: 20px;height: 20px;" src="image/search-graphicon.png"> Search</a>
 		    <a class="p-2 text-dark" href="#">Twitter</a>
