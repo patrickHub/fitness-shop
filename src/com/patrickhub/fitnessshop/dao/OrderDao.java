@@ -93,10 +93,10 @@ public class OrderDao {
 									+ "ON customers.customerID = address.customerID "
 								+ "INNER JOIN orders "
 									+ "ON address.addressID = orders.addressID "
-								+ "INNER JOIN orderitems "
-									+ "ON orders.orderID = orderitems.orderID " 
+								+ "INNER JOIN orderItems "
+									+ "ON orders.orderID = orderItems.orderID " 
 								+ "INNER JOIN products " 
-									+ "ON orderitems.productID = products.productID "
+									+ "ON orderItems.productID = products.productID "
 								+ "WHERE username =? "
 								+ "GROUP BY orders.orderID;";
 			

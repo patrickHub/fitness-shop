@@ -1,0 +1,37 @@
+version: "3.7"
+
+services:
+  fitness-shop:
+    container_name: fitness-shop.dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: patrickhub/fitness-shop:1.0-SNAPSHOT
+    ports:
+      - 8888:8080
+    depends_on:
+      - fitness-shop-mysql
+    networks:
+      fitness-shop-network:
+        aliases:
+          - fitness-shop
+
+  fitness-shop-mysql:
+    image: mysql:5.7
+    restart: always
+    container_name: fitness-shop-mysql.dev
+    networks:
+      fitness-shop-network:
+        aliases:
+          - fitness-shop-mysql
+    environment:
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: "password"
+      MYSQL_ROOT_PASSWORD: "password"
+
+    command: --init-file /data/fitness-shop/db/db.sql
+    volumes:
+      - ./db/db.sql:/data/fitness-shop/db/db.sql
+
+networks:
+  fitness-shop-network:

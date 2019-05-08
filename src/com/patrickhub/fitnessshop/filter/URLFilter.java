@@ -24,7 +24,7 @@ public class URLFilter implements Filter{
 		HttpServletRequest req = (HttpServletRequest)request;
 		
 		// verify that the given id parameter exists and is an number
-		if(req.getRequestURI().startsWith("/fitness-shop/product")) {
+		if(req.getServletPath().startsWith("/product")) {
 			
 			// check if the id parameter exist
 			if(req.getParameterMap().containsKey("id")) {
@@ -47,8 +47,8 @@ public class URLFilter implements Filter{
 			}
 		}
 		
-		// verify that checkout is accessible only when customer cart is not empty
-		if(req.getRequestURI().startsWith("/fitness-shop/checkout")) {
+		// verify that checkout is accessible only when customer cart is not empty 
+		if(req.getServletPath().startsWith("/checkout")) {
 			
 			// get user shopping cart and username attributes
 			ShoppingCart cart = (ShoppingCart)req.getSession().getAttribute("cart");
@@ -72,7 +72,7 @@ public class URLFilter implements Filter{
 		}
 		
 		// verify home and view order are accessible only when user has sign-in
-		if(req.getRequestURI().startsWith("/fitness-shop/home") || req.getRequestURI().startsWith("/fitness-shop/order-history")) {
+		if(req.getServletPath().startsWith("/home") || req.getServletPath().startsWith("/order-history")) {
 			
 			// get username
 			String username = (String)req.getSession().getAttribute("username");
