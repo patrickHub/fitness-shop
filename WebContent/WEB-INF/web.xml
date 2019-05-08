@@ -72,6 +72,14 @@
   	<url-pattern>/order-history</url-pattern>
   </servlet-mapping>
   <servlet>
+  	<servlet-name>OrderItemServlet</servlet-name>
+  	<servlet-class>com.patrickhub.fitnessshop.servlet.OrderItemServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>OrderItemServlet</servlet-name>
+  	<url-pattern>/order-items</url-pattern>
+  </servlet-mapping>
+  <servlet>
  	<servlet-name>LoginServlet</servlet-name>
   	<servlet-class>com.patrickhub.fitnessshop.servlet.LoginServlet</servlet-class>
   </servlet>

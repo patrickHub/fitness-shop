@@ -60,8 +60,8 @@ CREATE TABLE address(
 CREATE TABLE payments(
 	paymentID INT AUTO_INCREMENT,
     paymentCardNumber VARCHAR(50),
-    paymentCartCV VARCHAR(5),
-    paymentCartExpired VARCHAR(10),
+    paymentCardCV VARCHAR(5),
+    paymentCardExpired VARCHAR(10),
     
     CONSTRAINT Payment_PK PRIMARY KEY (paymentID)
     

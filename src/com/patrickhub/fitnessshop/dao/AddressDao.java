@@ -142,6 +142,40 @@ private final Logger LOG = Logger.getLogger(AddressDao.class.getName());
 		return address;
 	}
 	
+	/**
+	 * get an "id" address.
+	 * 
+	 * @param connection connection to db
+	 * @param id address id
+	 * @return the persisted address
+	 */
+	public Address findById(Connection connection, int id) {
+		Address address = null;
+		try {
+			// write the sql query
+			String sql = "SELECT * FROM address "
+							+ "WHERE addressID = ?;";
+			// get preparedStatement
+			PreparedStatement statement = connection.prepareStatement(sql);
+		    // set SQL parameters
+			statement.setInt(1,  id);
+			
+			// execute the query
+			ResultSet set = statement.executeQuery();
+			while(set.next()) {
+				address = new Address();
+				address.setId(set.getInt("addressID"));
+				address.setStreet(set.getString("addressStreet"));
+				address.setZipCode(set.getString("addressZipCode"));
+				address.setCity(set.getString("addressCity"));
+				address.setCountry(set.getString("addressCountry"));
+				address.setStatus(set.getString("addressStatus"));
+			}
+		}catch(SQLException ex) {
+			LOG.log(Level.SEVERE, ex, null);
+		}
+		return address;
+	}
 	
 
 }

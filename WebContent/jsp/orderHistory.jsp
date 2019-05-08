@@ -42,13 +42,13 @@
 							<p class="text-center">${order.date}</p>
 						</div>
 						<div class="col-md-2">
-							<p class="text-center">${order.price}</p>
+							<p class="text-center">CHF ${order.price}</p>
 						</div>
 						<div class="col-md-3 d-flex justify-content-center">
 							<span class="text-center px-3 py-2 bg-info border text-uppercase text-white">Shipped</span>
 						</div>
 						<div class="col-md-3 d-flex justify-content-center">
-							<a href="#" class="btn btn-md btn-secondary px-4">Details</a>
+							<a href="order-items?id=${order.id}" class="btn btn-md btn-secondary px-4">Details</a>
 						</div>
 					</div>
 				</c:forEach>

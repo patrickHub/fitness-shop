@@ -128,5 +128,45 @@ public class OrderDao {
 	}
 
 	
+	/**
+	 * get an "id" order.
+	 * 
+	 * @param connection connection to the database
+	 * @param id order id
+	 * @return order
+	 */
+	public Order findById(Connection connection, int id){
+		
+		Order order = null;
+		try {
+			// write the select sql
+			String sql = "SELECT * FROM orders "
+							+ "WHERE orderID = ?;";
+			
+			// get the prepare statement
+			PreparedStatement statement = connection.prepareStatement(sql);
+			
+			// set query parameters
+			statement.setInt(1, id);
+			
+			// execute the sql request
+			ResultSet set = statement.executeQuery();
+			while(set.next()) {
+				order = new Order();
+				order.setId(set.getInt("orderID"));
+				order.setAddressId(set.getInt("addressID"));
+				order.setPaymentId(set.getInt("paymentID"));
+				order.setDate(set.getDate("orderDate"));
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return order;
+		
+	}
+
+	
 }
 
