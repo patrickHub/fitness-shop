@@ -6,7 +6,7 @@ Fitness-shop is an online store project design to implement Java Servlet and JSP
 
 ## Fitness-shop Database design
 
-![online store database](https://github.com/patrickHub/fitness-shop/tree/master/WebContent/image/db-schema.png)
+You can see our database schema [here](https://github.com/patrickHub/fitness-shop/blob/master/WebContent/image/db-schema.PNG)
 
 In order to be simple, a user account can have many customers associated to his account. A customer can have many delivery addresses. Each time a customer add new address, it become his primary address and the others become his secondary addresses. this will allow a customer to receive his orders at different addresses. Therefore each order is associated to one delivery address. Each customer is also associated to one payment.
 
@@ -56,7 +56,7 @@ Well Fitness-shop is powered by
 
 - Track order detail for authenticated customers
 
-[order-history-detail](https://github.com/patrickHub/fitness-shop/tree/master/WebContent/image/order-history-detail.png)
+[order history detail](https://github.com/patrickHub/fitness-shop/tree/master/WebContent/image/order-history-detail.png)
 
 - New customer registration with client and server side validation
 
@@ -85,7 +85,7 @@ java -version
   To check your docker version type this command on your terminal
 
 ```
- docker version
+docker version
 ```
 
 Windows 10 operating system should have Git Bash install or a Bash Shell Command-line tool install in order to run the Bash script file.
@@ -101,11 +101,11 @@ cd fitness-shop
 bash buildAndRun.sh
 ```
 
-And you can start make orders to localhost:8888/http://localhost:8888/fitness-shop-0.0.1-SNAPSHOT/
+And you can start make orders to [localhost:8888/fitness-shop-0.0.1-SNAPSHOT](http://localhost:8888/fitness-shop-0.0.1-SNAPSHOT/)
 
 To simplefy every thing we have use:
 
-- [Dockerfile](https://github.com/patrickHub/fitness-shop/blob/master/Dockerfile) which pull tomcat:9.0.19-jre8 from from tomcat docker official then copy the
+- [Dockerfile](https://github.com/patrickHub/fitness-shop/blob/master/Dockerfile) which pull tomcat:9.0.19-jre8 from tomcat docker official then copy the
   _fitness-shop-0.0.1-SNAPSHOT.war_ file to /usr/local/tomcat/webapps/fitness-shop-0.0.1-SNAPSHOT.war
 - [docker-compose.yml](https://github.com/patrickHub/fitness-shop/blob/master/docker-compose.yml) which will create two services. One for build of the previous _Dockerfile_ and the other for mysql:5.7 image. As the _fitnes-shop.dev_ container should make database query to the database _fitness-shop-mysql.dev_ container, we have used the feature of Network. So the two containers are sharing the same network _fitness-shop-network_ and this is what will enable those containers to speach each other. Thanks to Docker for Network feature.
 - [buildAndRun.sh](https://github.com/patrickHub/fitness-shop/blob/master/buildAndRun.sh) which will execute several commands. first it will clean and package our fitness-shop web application. And if maven clean and package succeed, he would remove the two docker containers and the image build from the Dockerfile in order to be able to reuse the container and the image names write in docker-compose.yml. Finaly it will run docker-compose up command to start everything. Then all you need to do after download this repository is to run this bash script file.
